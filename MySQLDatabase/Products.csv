@@ -1,21 +1,51 @@
-ID,VendorName
-10,"Nestle Sofia Co."
-20,"Zagorka Co."
-30,"Targovishte Bottling Ltd."
-40,"Carlsberg Co."
-50,"Interbrew Co."
-60,"Henkel Ltd."
-70,"Coca Cola Co."
-80,"Chipita Bulgaria"
-90,Aktavis
-100,KFM
-110,KraftFoods
-120,"Ledenika & MM"
-130,Nilana
-140,"RedBull - Bulgaria"
-150,Tanki
-160,"Yuksel Tekstil"
-170,AVIS
-180,Adela
-190,Balkan
-200,BELLA
+ID,VendorID,ProductName,MeasureID,BasePrice
+1,40,"Beer ""Pirinsko Pivo""",100,0.76
+2,40,"Beer ""Heineken""",100,1.15
+3,120,"Beer ""Ledenika""",100,0.56
+4,20,"Beer ""Zagorka""",100,0.86
+5,10,KitCat,200,0.60
+6,70,"Coca Cola",100,0.60
+7,70,Sprite,100,0.60
+8,70,"Fanta Orange",100,0.60
+9,70,"Fanta Lemon",100,0.60
+10,70,"Schweppes Tonic",100,0.60
+11,70,"Schweppes Soda",100,0.20
+12,70,"Schweppes Bitter Lemon",100,0.60
+13,70,"Fanta Bambucha",100,0.60
+14,10,"Milka Milk Chocolate",200,1.00
+15,10,"Milka Lalnut Chocolate",200,1.00
+16,10,"Milka Kinder Chocolate",200,1.00
+17,80,"7Days Croissant Cacao",200,0.30
+18,80,"7Days Croissant Champagne",200,0.30
+19,90,"Body Wash Gel",500,2.50
+20,90,"Body Milk",500,1.80
+21,90,Shampoo,500,2.30
+22,90,"Liquid Soap",500,1.10
+23,80,"7Days Croissant Mini Caramel",200,0.60
+24,80,"7Days Croissant Mini Creme Brulle",200,0.60
+25,80,Finetti,200,1.20
+26,80,"Bake Rolls Chease",200,1.00
+27,80,"Bake Rolls Spinach",200,1.00
+28,80,"Bake Rolls Onions",200,1.00
+29,10,"Nestle 3in1",200,0.15
+30,10,"Nestle 2in1",200,0.10
+31,10,"Nestle Chocolate Nuts",200,1.00
+32,10,NessQuick,200,0.40
+33,10,"Waffle Mura",200,0.20
+34,10,"Waffle Mura Nuts",200,0.20
+35,10,"Waffle Mura Strawberry",200,0.20
+36,10,"Ness Caffe",200,0.20
+37,180,"Pork Meat",300,5.00
+38,180,Tomatoes,300,1.00
+39,180,"Beef Meat",300,5.50
+40,180,Chikens,300,3.50
+41,180,Fish,300,4.00
+42,180,Cucumbers,300,1.50
+43,180,Mushrooms,300,4.00
+44,180,Almond,400,2.00
+45,180,Apples,300,1.50
+46,180,Pears,300,2.00
+47,180,Hazelnuts,400,0.90
+48,180,Peaches,300,1.80
+49,180,Bread,300,1.00
+50,180,Wallnuts,400,0.70

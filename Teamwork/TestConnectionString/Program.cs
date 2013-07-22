@@ -32,6 +32,7 @@ namespace TestConnectionString
                         }
                         else
                         {
+
                             currentDirectory = entry.FileName;
                         }
 

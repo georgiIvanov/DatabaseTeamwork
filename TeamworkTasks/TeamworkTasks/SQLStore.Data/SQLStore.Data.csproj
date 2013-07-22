@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{1A340436-40BA-4C51-BC26-83A4A3850A6E}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{A8DC1049-D024-4812-8C66-0761229BAF0A}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SupermarketManager</RootNamespace>
-    <AssemblyName>SupermarketManager</AssemblyName>
+    <RootNamespace>SQLStore.Data</RootNamespace>
+    <AssemblyName>SQLStore.Data</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -44,12 +42,9 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Telerik.OpenAccess, Version=2013.2.702.1, Culture=neutral, PublicKeyToken=7ce17eeaf1d59342, processorArchitecture=MSIL" />
-    <Reference Include="Telerik.OpenAccess.35.Extensions, Version=2013.2.702.1, Culture=neutral, PublicKeyToken=7ce17eeaf1d59342, processorArchitecture=MSIL" />
-    <Reference Include="Telerik.OpenAccess.40.Extensions, Version=2013.2.702.1, Culture=neutral, PublicKeyToken=7ce17eeaf1d59342, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="SQLStoreDb.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -57,14 +52,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MySQLStore\MySQLStore.csproj">
-      <Project>{c50145e6-a244-4f1f-b41f-90d1925b4a00}</Project>
-      <Name>MySQLStore</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SQLStore.Data\SQLStore.Data.csproj">
-      <Project>{a8dc1049-d024-4812-8c66-0761229baf0a}</Project>
-      <Name>SQLStore.Data</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SQLStore.Model\SQLStore.Model.csproj">
       <Project>{f10dbd90-7fcf-48bc-aedb-4953291311a0}</Project>
       <Name>SQLStore.Model</Name>

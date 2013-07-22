@@ -13,8 +13,9 @@ namespace context
         public int Quantity { get; set; }
         public decimal UnitPrice { get; set; }
         public decimal Sum { get; set; }
+        public int LocationID { get; set;}
 
         public virtual Product Product { get; set; }
-
+        public virtual Location Location { get; set; }
     }
 }

@@ -15,15 +15,7 @@ namespace TestConnectionString
     {
         static void Main(string[] args)
         {
-            //TestContext db = new TestContext();
-
-            //db.Persons.Add(new Person() { Age = 18 });
-            //db.SaveChanges();
-
-            //foreach (var item in db.Persons)
-            //{
-            //    Console.WriteLine(item.Age);
-            //}
+            SupermarketSalesContext context = new SupermarketSalesContext();
 
             using (var sw = new StreamWriter("temp.out"))
             {
@@ -36,31 +28,63 @@ namespace TestConnectionString
                         {
                             entry.Extract("tmp", ExtractExistingFileAction.OverwriteSilently);
                             DataTable dt = ReadExcel("tmp\\" + entry.FileName);
-
-                            foreach (DataRow item in dt.Rows)
-                            {
-                                foreach (DataColumn column in dt.Columns)
-                                {
-                                    if (!string.IsNullOrWhiteSpace(item[column].ToString()))
-                                    {
-                                        Console.WriteLine(item[column]);
-                                    }
-
-                                }
-                            }
+                            ReadTable(dt, context);
                         }
                         else
                         {
                             currentDirectory = entry.FileName;
                         }
+
+                        context.SaveChanges();
                     }
+                }
+            }
+        }
+
+        private static void ReadTable(DataTable dt, SupermarketSalesContext context)
+        {
+            Location location = new Location();
+            location.LocationName = dt.Rows[0].ItemArray[0].ToString();
+            context.Locations.Add(location);
+            context.SaveChanges();
+
+            foreach (DataRow item in dt.Rows)
+            {
+                int num;
+                if (item.ItemArray.Length == 4 && int.TryParse(item.ItemArray[0].ToString(), out num))
+                {
+                    Sale sale = new Sale();
+
+                    for (int i = 0; i < item.ItemArray.Length; i++)
+                    {
+                        if (i == 0)
+                        {
+                            sale.ProductID = int.Parse(item[i].ToString());
+                        }
+                        else if (i == 1)
+                        {
+                            sale.Quantity = int.Parse(item[i].ToString());
+                        }
+                        else if (i == 2)
+                        {
+                            sale.UnitPrice = decimal.Parse(item[i].ToString());
+                        }
+                        else if (i == 3)
+                        {
+                            sale.Sum = decimal.Parse(item[i].ToString());
+                        }
+                    }
+
+                    sale.LocationID = context.Locations.Where(x => x.LocationName == location.LocationName)
+                        .First().LocationID;
+                    context.Sales.Add(sale);
                 }
             }
         }
 
         private static DataTable ReadExcel(string datasource)
         {
-            DataTable dt = new DataTable("newtable");
+            DataTable dt = new DataTable("SupermarketSalesTable");
             OleDbConnectionStringBuilder csbuilder = new OleDbConnectionStringBuilder();
             csbuilder.Provider = "Microsoft.ACE.OLEDB.12.0";
             csbuilder.DataSource = datasource;

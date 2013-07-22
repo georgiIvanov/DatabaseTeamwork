@@ -19,6 +19,19 @@ namespace SupermarketManager
             TransferTables transferTables = new TransferTables();
             transferTables.TransferFromMySqlToSQLServer();
 
+            TransferFromExcel transferExcel = new TransferFromExcel();
+            transferExcel.ParseExcelZip("zip\\Sample-Sales-Reports.zip");
+
+
+            using (SQLStoreDb db = new SQLStoreDb())
+            {
+                var a = from w in db.SalesOnDate
+                        select w;
+
+                //var r = from tt in db.Sales
+                //        select tt;
+            }
+
         }
     }
 }

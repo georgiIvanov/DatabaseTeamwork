@@ -27,6 +27,8 @@ namespace SupermarketManager
                         });
                     }
 
+                    sqlStore.SaveChanges();
+
                     foreach (var mySqlMeasure in mySqlStore.Measures)
                     {
                         sqlStore.Measures.Add(new SQLStore.Model.Measure()
@@ -35,6 +37,8 @@ namespace SupermarketManager
                             MeasureName = mySqlMeasure.MeasuresName
                         });
                     }
+
+                    sqlStore.SaveChanges();
 
                     foreach (var mySqlProduct in mySqlStore.Products)
                     {
@@ -48,13 +52,7 @@ namespace SupermarketManager
                         });
                     }
 
-                    
-
-
-
                     sqlStore.SaveChanges();
-
-
 
                 }
             }

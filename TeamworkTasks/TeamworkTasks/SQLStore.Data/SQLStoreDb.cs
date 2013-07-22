@@ -19,5 +19,8 @@ namespace SQLStore.Data
         public DbSet<Product> Products { get; set; }
         public DbSet<Measure> Measures { get; set; }
         public DbSet<Vendor> Vendors { get; set; }
+        public DbSet<Location> Locations { get; set; }
+        public DbSet<Sale> Sales { get; set; }
+        public DbSet<SaleOnDate> SalesOnDate { get; set; }
     }
 }

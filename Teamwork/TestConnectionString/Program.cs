@@ -17,29 +17,31 @@ namespace TestConnectionString
         {
             SupermarketSalesContext context = new SupermarketSalesContext();
 
-            using (var sw = new StreamWriter("temp.out"))
-            {
-                using (ZipFile zip = ZipFile.Read("..\\..\\Sample-Sales-Reports.zip"))
-                {
-                    string currentDirectory = string.Empty;
-                    foreach (var entry in zip)
-                    {
-                        if (!entry.IsDirectory)
-                        {
-                            entry.Extract("tmp", ExtractExistingFileAction.OverwriteSilently);
-                            DataTable dt = ReadExcel("tmp\\" + entry.FileName);
-                            ReadTable(dt, context);
-                        }
-                        else
-                        {
+            PDFFileCreator.CreateTable("fu");
 
-                            currentDirectory = entry.FileName;
-                        }
+            //using (var sw = new StreamWriter("temp.out"))
+            //{
+            //    using (ZipFile zip = ZipFile.Read("..\\..\\Sample-Sales-Reports.zip"))
+            //    {
+            //        string currentDirectory = string.Empty;
+            //        foreach (var entry in zip)
+            //        {
+            //            if (!entry.IsDirectory)
+            //            {
+            //                entry.Extract("tmp", ExtractExistingFileAction.OverwriteSilently);
+            //                DataTable dt = ReadExcel("tmp\\" + entry.FileName);
+            //                ReadTable(dt, context);
+            //            }
+            //            else
+            //            {
 
-                        context.SaveChanges();
-                    }
-                }
-            }
+            //                currentDirectory = entry.FileName;
+            //            }
+
+            //            context.SaveChanges();
+            //        }
+            //    }
+            //}
         }
 
         private static void ReadTable(DataTable dt, SupermarketSalesContext context)

@@ -16,12 +16,14 @@ namespace SupermarketManager
         {
             
 
-            TransferTables transferTables = new TransferTables();
-            transferTables.TransferFromMySqlToSQLServer();
+            //TransferTables transferTables = new TransferTables();
+            //transferTables.TransferFromMySqlToSQLServer();
 
-            TransferFromExcel transferExcel = new TransferFromExcel();
-            transferExcel.ParseExcelZip("zip\\Sample-Sales-Reports.zip");
+            //TransferFromExcel transferExcel = new TransferFromExcel();
+            //transferExcel.ParseExcelZip("zip\\Sample-Sales-Reports.zip");
 
+            GeneratePDF pdf = new GeneratePDF();
+            pdf.CreatePDF();
 
             using (SQLStoreDb db = new SQLStoreDb())
             {

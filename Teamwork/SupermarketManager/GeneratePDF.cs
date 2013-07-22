@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SQLStore.Data;
+using System.Threading;
+using System.Globalization;
 
 namespace SupermarketManager
 {
@@ -53,6 +55,7 @@ namespace SupermarketManager
 
         public static void CreateTable(string pdfFile)
         {
+            Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
             var collection = GetSalesByDate();
             decimal grandTotal = 0;
             Document document = new Document();
@@ -63,7 +66,7 @@ namespace SupermarketManager
             foreach (var rows in collection)
             {
                 PdfPTable table = new PdfPTable(5);
-                CreateCell(table, rows.Key.ToString(), true, true);
+                CreateCell(table, rows.Key.ToShortDateString(), true, true);
                 CreateCell(table, "ProductName");
 
                 CreateCell(table, "Quantity");

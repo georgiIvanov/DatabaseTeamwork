@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using MySQLStore;
 using SQLStore.Data;
 using SQLStore.Model;
+using System.Data.Entity;
 
 namespace SupermarketManager
 {
@@ -13,20 +14,11 @@ namespace SupermarketManager
     {
         static void Main(string[] args)
         {
-            using (var store = new StoreModel())
-            {
-                foreach (var item in store.Products)
-                {
-                    Console.WriteLine(item.ProductName);
-                }
-            }
+            
 
-            using (var sqlStore = new SQLStoreDb())
-            {
-                var aa = from a in sqlStore.Products
-                         select a;
+            TransferTables transferTables = new TransferTables();
+            transferTables.TransferFromMySqlToSQLServer();
 
-            }
         }
     }
 }

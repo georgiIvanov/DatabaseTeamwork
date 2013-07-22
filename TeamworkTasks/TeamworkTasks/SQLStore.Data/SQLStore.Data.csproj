@@ -44,6 +44,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Migrations\201307221242417_InitialCreate.cs" />
+    <Compile Include="Migrations\201307221242417_InitialCreate.Designer.cs">
+      <DependentUpon>201307221242417_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="SQLStoreDb.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -56,6 +61,11 @@
       <Project>{f10dbd90-7fcf-48bc-aedb-4953291311a0}</Project>
       <Name>SQLStore.Model</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201307221242417_InitialCreate.resx">
+      <DependentUpon>201307221242417_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

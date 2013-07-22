@@ -1,0 +1,6 @@
+ID,VendorID,ProductName,MeasureID,BasePrice
+1,40,"Beer ""Pirinsko Pivo""",100,0.76
+2,40,"Beer ""Heineken""",100,1.15
+3,120,"Beer ""Ledenika""",100,0.56
+4,20,"Beer ""Zagorka""",100,0.86
+5,10,KitCat,200,0.60

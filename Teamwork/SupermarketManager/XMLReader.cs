@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
+using SQLStore.Data;
+using SQLStore.Model;
 
 namespace SupermarketManager
 {
@@ -11,30 +10,40 @@ namespace SupermarketManager
     {
         public static void ReadXml(string fileName)
         {
-            // should read and write into the model
-            using (XmlReader reader = XmlReader.Create("../../" + fileName))
+            using (var context = new SQLStoreDb())
             {
-                while (reader.Read())
+                using (XmlReader reader = XmlReader.Create(string.Format("../../{0}", fileName)))
                 {
-                    if ((reader.NodeType == XmlNodeType.Element) &&
-                        (reader.Name == "expenses"))
+                    Vendor vendor = new Vendor();
+                    while (reader.Read())
                     {
-                        Console.WriteLine(reader.GetAttribute("month"));
-                        Console.WriteLine(reader.ReadElementString());
+                        if ((reader.NodeType == XmlNodeType.Element) &&
+                            (reader.Name == "sale"))
+                        {
+                            string vendorName = reader.GetAttribute("vendor");
+                            vendor = context.Vendors.Where(x => x.VendorName == vendorName).First();
+                        }
+                        else if (reader.NodeType == XmlNodeType.Element &&
+                                 reader.Name == "expenses")
+                        {
+                            Month month = new Month();
+                            month.MonthDate = DateTime.Parse(reader.GetAttribute("month"));
+                            if (!context.Months.Any(x => x.MonthDate == month.MonthDate))
+                            {
+                                context.Months.Add(month);
+                                context.SaveChanges();
+                            }
+
+                            VendorMonth vendorMonth = new VendorMonth();
+                            vendorMonth.VendorID = vendor.Id;
+                            vendorMonth.MonthID = context.Months.Where(x => x.MonthDate == month.MonthDate).First().MonthId;
+                            vendorMonth.Expenses = decimal.Parse(reader.ReadElementString());
+                            context.VendorMonths.Add(vendorMonth);
+                            context.SaveChanges();
+                        }
                     }
                 }
             }
-
-            //using (XmlReader reader = XmlReader.Create("../../" + fileName))
-            //{
-            //    while (reader.Read())
-            //    {
-            //        if (reader.NodeType == XmlNodeType.Element)
-            //        {
-            //            Console.WriteLine(reader.Name);
-            //        }
-            //    }
-            //}
         }
     }
 }

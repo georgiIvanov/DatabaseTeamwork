@@ -22,5 +22,13 @@ namespace SQLStore.Data
         public DbSet<Location> Locations { get; set; }
         public DbSet<Sale> Sales { get; set; }
         public DbSet<SaleOnDate> SalesOnDate { get; set; }
+        public DbSet<Month> Months { get; set; }
+        public DbSet<VendorMonth> VendorMonths { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<VendorMonth>().HasKey(vm => new { vm.VendorID, vm.MonthID });
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

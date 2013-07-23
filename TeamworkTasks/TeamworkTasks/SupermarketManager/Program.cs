@@ -25,6 +25,8 @@ namespace SupermarketManager
             
             GeneratePDF.CreateTable("test.pdf");
 
+            XMLCreator.CreateXml("Sales-by-Vendors-report.xml");
+
             using (SQLStoreDb db = new SQLStoreDb())
             {
                 var a = from w in db.SalesOnDate

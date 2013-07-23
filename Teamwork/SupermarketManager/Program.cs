@@ -16,25 +16,27 @@ namespace SupermarketManager
         {
             
 
-            TransferTables transferTables = new TransferTables();
-            transferTables.TransferFromMySqlToSQLServer();
+            //TransferTables transferTables = new TransferTables();
+            //transferTables.TransferFromMySqlToSQLServer();
 
-            TransferFromExcel transferExcel = new TransferFromExcel();
-            transferExcel.ParseExcelZip("zip\\Sample-Sales-Reports.zip");
+            //TransferFromExcel transferExcel = new TransferFromExcel();
+            //transferExcel.ParseExcelZip("zip\\Sample-Sales-Reports.zip");
 
             
-            GeneratePDF.CreateTable("test.pdf");
+            //GeneratePDF.CreateTable("test.pdf");
 
-            XMLCreator.CreateXml("Sales-by-Vendors-report.xml");
+            //XMLCreator.CreateXml("Sales-by-Vendors-report.xml");
 
             string dbName = "productreports";
-            string collectionName = "reports";
-            MongoDBAccess mongodb = new MongoDBAccess(dbName, collectionName);
+            string reportCollectionName = "reports";
+            string expensesCollectionName = "expenses";
+            MongoDBAccess mongodb = new MongoDBAccess(dbName, reportCollectionName, expensesCollectionName);
 
             ReportCreator.RecordReports(mongodb);
+            ReportCreator.RecordExpenses(mongodb);
 
 
-            XMLReader.ReadXml("Vendors-Expenses.xml");
+            //XMLReader.ReadXml("Vendors-Expenses.xml");
 
             using (SQLStoreDb db = new SQLStoreDb())
             {

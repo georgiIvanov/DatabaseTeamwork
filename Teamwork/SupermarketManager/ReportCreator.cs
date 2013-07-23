@@ -12,7 +12,7 @@ namespace SupermarketManager
 {
     class ReportCreator
     {
-        static List<ReportModel> GetData()
+        static List<ReportModel> GetReportData()
         {
             List<ReportModel> reportCollection = new List<ReportModel>();
             using (SQLStoreDb db = new SQLStoreDb())
@@ -51,16 +51,44 @@ namespace SupermarketManager
             return reportCollection;
         }
 
+        static List<ExpenseModel> GetExpenseData()
+        {
+            List<ExpenseModel> expensesCollection = new List<ExpenseModel>();
+            using (SQLStoreDb db = new SQLStoreDb())
+            {
+                var coll = (from vm in db.VendorMonths
+                           select new ExpenseModel
+                           {
+                               vendor_name = vm.Vendor.VendorName,
+                               month = vm.Month.MonthDate,
+                               expenses = vm.Expenses
+                           }).ToList();
+
+
+                foreach (var exModel in coll)
+                {
+                    expensesCollection.Add(exModel);
+                }
+            }
+
+            return expensesCollection;
+        }
                              
         public static void RecordReports(MongoDBAccess mongodb)
         {
             string path = "Product-Reports\\";
-            var reportCollection = GetData();
+            var reportCollection = GetReportData();
 
             
-            mongodb.StoreInCollection(reportCollection);
+            mongodb.StoreInReportCollection(reportCollection);
 
             WriteToFileSystem(path, mongodb.GetReportObjects());
+        }
+
+        public static void RecordExpenses(MongoDBAccess mongodb)
+        {
+            var expensesCollection = GetExpenseData();
+            mongodb.StoreInExpensesCollection(expensesCollection);
         }
 
         private static void WriteToFileSystem(string path, IEnumerable<ReportModel> reportCollection)
@@ -92,6 +120,17 @@ namespace SupermarketManager
         public int total_quantity_sold { get; set; }
 
         public decimal total_incomes { get; set; }
+    }
+
+    class ExpenseModel
+    {
+        public ObjectId _id { get; set; }
+
+        public string vendor_name { get; set; }
+
+        public DateTime month { get; set; }
+
+        public decimal expenses { get; set; }
     }
 
     class ObjectIdConverter : JsonConverter

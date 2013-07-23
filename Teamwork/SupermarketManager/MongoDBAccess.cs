@@ -14,29 +14,40 @@ namespace SupermarketManager
         MongoClient client;
         MongoServer server;
         MongoDatabase dictionaryDB;
-        MongoCollection<ReportModel> collection;
+        MongoCollection<ReportModel> reportCollection;
+        MongoCollection<ExpenseModel> expensesCollection;
+
         IQueryable<ReportModel> queryableCollection;
 
-        public MongoDBAccess(string database, string collection)
+        public MongoDBAccess(string database, string reportCollection, string expensesCollection)
         {
             this.client = new MongoClient("mongodb://localhost");
             this.server = client.GetServer();
             this.dictionaryDB = server.GetDatabase(database);
 
-            this.collection = dictionaryDB.GetCollection<ReportModel>(collection);
+            this.reportCollection = dictionaryDB.GetCollection<ReportModel>(reportCollection);
+            this.expensesCollection = dictionaryDB.GetCollection<ExpenseModel>(expensesCollection);
             //queryableCollection = this.collection.AsQueryable<ReportModel>();
         }
 
         public void StoreInCollection(ReportModel obj)
         {
-            collection.Insert(obj);
+            reportCollection.Insert(obj);
         }
 
-        public void StoreInCollection(List<ReportModel> obj)
+        public void StoreInReportCollection(List<ReportModel> obj)
         {
             foreach (var item in obj)
             {
-                collection.Insert(item);
+                reportCollection.Insert(item);
+            }
+        }
+
+        public void StoreInExpensesCollection(List<ExpenseModel> obj)
+        {
+            foreach (var item in obj)
+            {
+                expensesCollection.Insert(item);
             }
         }
 
@@ -49,7 +60,9 @@ namespace SupermarketManager
 
         public IEnumerable<ReportModel> GetReportObjects()
         {
-            return collection.FindAll();
+            return reportCollection.FindAll();
         }
+
+
     }
 }

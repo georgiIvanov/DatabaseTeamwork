@@ -17,8 +17,8 @@ namespace SupermarketManager
             //TransferTables transferTables = new TransferTables();
             //transferTables.TransferFromMySqlToSQLServer();
 
-            //TransferFromExcel transferExcel = new TransferFromExcel();
-            //transferExcel.ParseExcelZip("zip\\Sample-Sales-Reports.zip");
+            TransferFromExcel transferExcel = new TransferFromExcel();
+            transferExcel.ParseExcelZip("zip\\Sample-Sales-Reports.zip");
 
             
             GeneratePDF.CreateTable("test.pdf");

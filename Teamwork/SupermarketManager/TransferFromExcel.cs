@@ -31,6 +31,7 @@ namespace SupermarketManager
                             entry.Extract("tmp", ExtractExistingFileAction.OverwriteSilently);
                             DataTable dt = ReadExcel("tmp\\" + entry.FileName);
                             ReadTable(dt, context);
+                            File.Delete("tmp\\" + entry.FileName);
                             //context.SaveChanges();
                         }
                         else

@@ -66,8 +66,8 @@ namespace SupermarketManager
         private static void WriteSummary(XmlWriter writer, DateTime date, decimal totalSum)
         {
             writer.WriteStartElement("summary");
-            writer.WriteAttributeString("date", date.ToString());
             writer.WriteAttributeString("total-sum", totalSum.ToString());
+            writer.WriteAttributeString("date", date.ToString());
 
             writer.WriteEndElement();
         }

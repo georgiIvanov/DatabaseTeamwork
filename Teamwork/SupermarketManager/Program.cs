@@ -14,12 +14,12 @@ namespace SupermarketManager
     {
         static void Main(string[] args)
         {
-            
 
-            //TransferTables transferTables = new TransferTables();
+
+            TransferTables transferTables = new TransferTables();
             //transferTables.TransferFromMySqlToSQLServer();
 
-            //TransferFromExcel transferExcel = new TransferFromExcel();
+            TransferFromExcel transferExcel = new TransferFromExcel();
             //transferExcel.ParseExcelZip("zip\\Sample-Sales-Reports.zip");
 
             //GeneratePDF pdf = new GeneratePDF();

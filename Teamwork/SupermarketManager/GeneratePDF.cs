@@ -7,9 +7,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SQLStore.Data;
 using System.Threading;
 using System.Globalization;
+using System.Windows;
 
 namespace SupermarketManager
 {
@@ -63,19 +63,22 @@ namespace SupermarketManager
                                new FileStream(pdfFile, FileMode.Create));
             document.Open();
 
+            PdfPTable table = new PdfPTable(5);
+            CreateCell(table, "Aggregated Sales Report", false, 5, true);
+
             foreach (var rows in collection)
             {
-                PdfPTable table = new PdfPTable(5);
-                CreateCell(table, rows.Key.ToShortDateString(), true, true);
-                CreateCell(table, "ProductName");
+                CreateCell(table, rows.Key.ToShortDateString(), true, 5);
+                CreateCell(table, "ProductName", true, 0, true);
 
-                CreateCell(table, "Quantity");
+                CreateCell(table, "Quantity", true, 0, true);
 
-                CreateCell(table, "Unit Price");
+                CreateCell(table, "Unit Price", true, 0, true);
 
-                CreateCell(table, "Location");
+                CreateCell(table, "Location", true, 0, true);
 
-                CreateCell(table, "Sum");
+                CreateCell(table, "Sum", true, 0, true);
+
                 foreach (var row in rows)
                 {
                     CreateCell(table, row.ProductName, false);
@@ -84,24 +87,36 @@ namespace SupermarketManager
                     CreateCell(table, row.Location, false);
                     CreateCell(table, row.Sum.ToString(), false);
                 }
+
                 var totalSum = rows.Sum(x => x.Sum);
                 grandTotal += totalSum;
-                CreateCell(table, "Total: " + totalSum, false, true);
-                document.Add(table);
+                CreateCell(table, string.Format("Total sum for {0}:  ", rows.Key.ToShortDateString()), false, 4);
+                CreateCell(table, totalSum.ToString(), false, 0, true);
+                //document.Add(table);
             }
 
-            PdfPTable grandSumTable = new PdfPTable(5);
-            CreateCell(grandSumTable, "Grand Total: " + grandTotal, true, true);
-            document.Add(grandSumTable);
+            //PdfPTable grandSumTable = new PdfPTable(5);
+            CreateCell(table, "Grand Total:  ", false, 4);
+            CreateCell(table, grandTotal.ToString(), false, 0, true);
+            document.Add(table);
             document.Close();
-
         }
 
-        private static void CreateCell(PdfPTable table, string name, bool hasColor = true, bool hasColumnSpan = false)
+        private static void CreateCell(PdfPTable table, string name, bool hasColor = true, int columnSpan = 0, bool isBold = false)
         {
             Cell cell = new Cell();
             Phrase phrase = new Phrase();
-            phrase.Add(new Chunk(name));
+
+            if (isBold)
+            {
+                Font font = FontFactory.GetFont(BaseFont.HELVETICA_BOLD);
+                phrase.Add(new Chunk(name, font));
+            }
+            else
+            {
+                phrase.Add(new Chunk(name));
+            }
+
             cell.AddElement(phrase);
             cell.Border = PdfCell.BOTTOM_BORDER | PdfCell.LEFT_BORDER | PdfCell.RIGHT_BORDER | PdfCell.TOP_BORDER;
             if (hasColor)
@@ -109,9 +124,18 @@ namespace SupermarketManager
                 cell.BackgroundColor = Color.LIGHT_GRAY;
             }
 
-            if (hasColumnSpan)
+            if (columnSpan > 0)
             {
-                cell.Colspan = 5;
+                cell.Colspan = columnSpan;
+            }
+
+            if (columnSpan == 4)
+            {
+                cell.HorizontalAlignment = Element.ALIGN_RIGHT;
+            }
+            else if (name == "Aggregated Sales Report")
+            {
+                cell.HorizontalAlignment = Element.ALIGN_CENTER;
             }
 
             table.AddCell(cell.CreatePdfPCell());

@@ -7,6 +7,7 @@ using MySQLStore;
 using SQLStore.Data;
 using SQLStore.Model;
 using System.Data.Entity;
+using SQLiteStore;
 
 namespace SupermarketManager
 {
@@ -32,23 +33,13 @@ namespace SupermarketManager
             string expensesCollectionName = "expenses";
             MongoDBAccess mongodb = new MongoDBAccess(dbName, reportCollectionName, expensesCollectionName);
 
-            //ReportCreator.RecordReports(mongodb);
-            //ReportCreator.RecordExpenses(mongodb);
+            ReportCreator.RecordReports(mongodb);
+            ReportCreator.RecordExpenses(mongodb);
 
 
             //XMLReader.ReadXml("Vendors-Expenses.xml");
 
             TransferToExcel.WriteToExcel("Products-Total-Report.xlsx", mongodb);
-
-            using (SQLStoreDb db = new SQLStoreDb())
-            {
-                var a = from w in db.SalesOnDate
-                        select w;
-
-                //var r = from tt in db.Sales
-                //        select tt;
-            }
-
         }
     }
 }

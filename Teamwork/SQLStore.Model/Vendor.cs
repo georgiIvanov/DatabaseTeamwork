@@ -15,6 +15,7 @@ namespace SQLStore.Model
         {
             this.vendorMonths = new HashSet<VendorMonth>();
         }
+
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
         public string VendorName { get; set; }

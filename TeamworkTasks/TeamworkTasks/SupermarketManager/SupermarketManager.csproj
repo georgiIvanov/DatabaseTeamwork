@@ -74,6 +74,7 @@
     <Compile Include="TransferFromExcel.cs" />
     <Compile Include="TransferTables.cs" />
     <Compile Include="XMLCreator.cs" />
+    <Compile Include="XMLReader.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

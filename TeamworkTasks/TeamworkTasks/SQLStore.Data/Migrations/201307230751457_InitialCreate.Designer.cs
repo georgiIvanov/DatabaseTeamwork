@@ -11,7 +11,7 @@ namespace SQLStore.Data.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201307221242417_InitialCreate"; }
+            get { return "201307230751457_InitialCreate"; }
         }
         
         string IMigrationMetadata.Source

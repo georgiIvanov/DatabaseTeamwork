@@ -57,10 +57,39 @@ namespace SupermarketManager
             string path = "Product-Reports\\";
             var reportCollection = GetData();
 
-            
-            mongodb.StoreInCollection(reportCollection);
+
+            mongodb.StoreInReportCollection(reportCollection);
 
             WriteToFileSystem(path, mongodb.GetReportObjects());
+        }
+
+        public static void RecordExpenses(MongoDBAccess mongodb)
+        {
+            var expensesCollection = GetExpenseData();
+            mongodb.StoreInExpensesCollection(expensesCollection);
+        }
+
+        static List<ExpenseModel> GetExpenseData()
+        {
+            List<ExpenseModel> expensesCollection = new List<ExpenseModel>();
+            using (SQLStoreDb db = new SQLStoreDb())
+            {
+                var coll = (from vm in db.VendorMonths
+                            select new ExpenseModel
+                            {
+                                vendor_name = vm.Vendor.VendorName,
+                                month = vm.Month.MonthDate,
+                                expenses = vm.Expenses
+                            }).ToList();
+
+
+                foreach (var exModel in coll)
+                {
+                    expensesCollection.Add(exModel);
+                }
+            }
+
+            return expensesCollection;
         }
 
         private static void WriteToFileSystem(string path, IEnumerable<ReportModel> reportCollection)
@@ -76,6 +105,17 @@ namespace SupermarketManager
                 }
             }
         }
+    }
+
+    class ExpenseModel
+    {
+        public ObjectId _id { get; set; }
+
+        public string vendor_name { get; set; }
+
+        public DateTime month { get; set; }
+
+        public decimal expenses { get; set; }
     }
 
     class ReportModel

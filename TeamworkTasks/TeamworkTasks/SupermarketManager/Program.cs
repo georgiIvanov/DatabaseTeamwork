@@ -14,7 +14,7 @@ namespace SupermarketManager
     {
         static void Main(string[] args)
         {
-            
+
 
             TransferTables transferTables = new TransferTables();
             transferTables.TransferFromMySqlToSQLServer();
@@ -22,19 +22,21 @@ namespace SupermarketManager
             TransferFromExcel transferExcel = new TransferFromExcel();
             transferExcel.ParseExcelZip("zip\\Sample-Sales-Reports.zip");
 
-            
+
             GeneratePDF.CreateTable("test.pdf");
 
             XMLCreator.CreateXml("Sales-by-Vendors-report.xml");
 
             string dbName = "productreports";
             string collectionName = "reports";
-            MongoDBAccess mongodb = new MongoDBAccess(dbName, collectionName);
+            string expensesCollectionName = "expenses";
+            MongoDBAccess mongodb = new MongoDBAccess(dbName, collectionName, expensesCollectionName);
 
             ReportCreator.RecordReports(mongodb);
-
-
+            
             XMLReader.ReadXml("Vendors-Expenses.xml");
+
+            ReportCreator.RecordExpenses(mongodb);
 
             using (SQLStoreDb db = new SQLStoreDb())
             {

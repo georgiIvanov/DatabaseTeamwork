@@ -7,9 +7,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Threading;
+using SQLStore.Data;
 using System.Globalization;
-using System.Windows;
+using System.Threading;
 
 namespace SupermarketManager
 {

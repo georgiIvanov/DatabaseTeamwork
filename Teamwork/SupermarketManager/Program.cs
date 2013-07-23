@@ -15,11 +15,12 @@ namespace SupermarketManager
         static void Main(string[] args)
         {
             TransferTables transferTables = new TransferTables();
-            //transferTables.TransferFromMySqlToSQLServer();
+            transferTables.TransferFromMySqlToSQLServer();
 
             TransferFromExcel transferExcel = new TransferFromExcel();
-            //transferExcel.ParseExcelZip("zip\\Sample-Sales-Reports.zip");
-            //GeneratePDF pdf = new GeneratePDF();
+            transferExcel.ParseExcelZip("zip\\Sample-Sales-Reports.zip");
+
+            
             GeneratePDF.CreateTable("test.pdf");
 
             XMLCreator.CreateXml("Sales-by-Vendors-report.xml");
@@ -28,9 +29,6 @@ namespace SupermarketManager
             {
                 var a = from w in db.SalesOnDate
                         select w;
-
-                //var r = from tt in db.Sales
-                //        select tt;
             }
 
         }

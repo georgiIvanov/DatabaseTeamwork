@@ -9,14 +9,13 @@ using MongoDB.Driver;
 
 namespace SupermarketManager
 {
-    class MongoDBAccess
+    public class MongoDBAccess
     {
         MongoClient client;
         MongoServer server;
         MongoDatabase dictionaryDB;
         MongoCollection<ReportModel> reportCollection;
         MongoCollection<ExpenseModel> expensesCollection;
-        IQueryable<ReportModel> queryableCollection;
 
         public MongoDBAccess(string database, string reportCollection, string expensesCollection)
         {
@@ -50,16 +49,14 @@ namespace SupermarketManager
             }
         }
 
-        public ReportModel GetFromCollecion(int key)
-        {
-            var obj = queryableCollection.Where(x => x.product_id == key).First();
-
-            return obj;
-        }
-
         public IEnumerable<ReportModel> GetReportObjects()
         {
             return reportCollection.FindAll();
+        }
+
+        public IEnumerable<ExpenseModel> GetExpenseObjects()
+        {
+            return expensesCollection.FindAll();
         }
     }
 }

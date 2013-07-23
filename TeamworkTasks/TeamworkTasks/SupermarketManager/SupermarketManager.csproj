@@ -73,6 +73,7 @@
     <Compile Include="ReportCreator.cs" />
     <Compile Include="TransferFromExcel.cs" />
     <Compile Include="TransferTables.cs" />
+    <Compile Include="TransferToExcel.cs" />
     <Compile Include="XMLCreator.cs" />
     <Compile Include="XMLReader.cs" />
   </ItemGroup>
@@ -84,6 +85,10 @@
     <ProjectReference Include="..\MySQLStore\MySQLStore.csproj">
       <Project>{c50145e6-a244-4f1f-b41f-90d1925b4a00}</Project>
       <Name>MySQLStore</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SQLiteStore\SQLiteStore.csproj">
+      <Project>{b695dabe-038a-4a8d-b47c-51a4d47ae03d}</Project>
+      <Name>SQLiteStore</Name>
     </ProjectReference>
     <ProjectReference Include="..\SQLStore.Data\SQLStore.Data.csproj">
       <Project>{a8dc1049-d024-4812-8c66-0761229baf0a}</Project>

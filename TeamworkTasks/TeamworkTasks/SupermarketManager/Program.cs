@@ -15,6 +15,14 @@ namespace SupermarketManager
         static void Main(string[] args)
         {
 
+            ///
+            ///Don't forget to turn on MySQL, SQL Server and MongoDB servers
+            ///you should set your root password to 1234 or change the mysql connection string
+            ///the error is wrong :)
+            ///
+            /// output files are in the project folder and bin\Debug directory
+            ///
+
 
             TransferTables transferTables = new TransferTables();
             transferTables.TransferFromMySqlToSQLServer();
@@ -37,16 +45,6 @@ namespace SupermarketManager
             XMLReader.ReadXml("Vendors-Expenses.xml");
 
             ReportCreator.RecordExpenses(mongodb);
-
-            using (SQLStoreDb db = new SQLStoreDb())
-            {
-                var a = from w in db.SalesOnDate
-                        select w;
-
-                //var r = from tt in db.Sales
-                //        select tt;
-            }
-
         }
     }
 }

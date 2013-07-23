@@ -95,7 +95,7 @@ namespace SupermarketManager
         private static void WriteToFileSystem(string path, IEnumerable<ReportModel> reportCollection)
         {
             JsonSerializer serializer = new JsonSerializer();
-
+            
             foreach (var rep in reportCollection)
             {
                 using (StreamWriter sw = new StreamWriter(path + rep.product_id + ".json"))
@@ -107,7 +107,7 @@ namespace SupermarketManager
         }
     }
 
-    class ExpenseModel
+    public class ExpenseModel
     {
         public ObjectId _id { get; set; }
 
@@ -118,7 +118,7 @@ namespace SupermarketManager
         public decimal expenses { get; set; }
     }
 
-    class ReportModel
+    public class ReportModel
     {
         [JsonConverter(typeof(ObjectIdConverter))]
         public ObjectId _id { get; set; }

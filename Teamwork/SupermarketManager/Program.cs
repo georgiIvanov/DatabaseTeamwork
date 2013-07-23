@@ -32,8 +32,8 @@ namespace SupermarketManager
             string expensesCollectionName = "expenses";
             MongoDBAccess mongodb = new MongoDBAccess(dbName, reportCollectionName, expensesCollectionName);
 
-            ReportCreator.RecordReports(mongodb);
-            ReportCreator.RecordExpenses(mongodb);
+            //ReportCreator.RecordReports(mongodb);
+            //ReportCreator.RecordExpenses(mongodb);
 
 
             //XMLReader.ReadXml("Vendors-Expenses.xml");

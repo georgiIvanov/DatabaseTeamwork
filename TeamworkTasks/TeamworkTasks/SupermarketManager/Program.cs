@@ -22,8 +22,8 @@ namespace SupermarketManager
             //TransferFromExcel transferExcel = new TransferFromExcel();
             //transferExcel.ParseExcelZip("zip\\Sample-Sales-Reports.zip");
 
-            GeneratePDF pdf = new GeneratePDF();
-            pdf.CreatePDF();
+            
+            GeneratePDF.CreateTable("test.pdf");
 
             using (SQLStoreDb db = new SQLStoreDb())
             {

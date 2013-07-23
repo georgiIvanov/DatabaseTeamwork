@@ -15,12 +15,21 @@ namespace SupermarketManager
         static void Main(string[] args)
         {
 
+<<<<<<< HEAD
 
             TransferTables transferTables = new TransferTables();
             //transferTables.TransferFromMySqlToSQLServer();
 
             TransferFromExcel transferExcel = new TransferFromExcel();
             //transferExcel.ParseExcelZip("zip\\Sample-Sales-Reports.zip");
+=======
+
+            TransferTables transferTables = new TransferTables();
+            transferTables.TransferFromMySqlToSQLServer();
+
+            TransferFromExcel transferExcel = new TransferFromExcel();
+            transferExcel.ParseExcelZip("zip\\Sample-Sales-Reports.zip");
+>>>>>>> 90daa0ac00f1418cce2b5c32fa15d637fbee62bf
 
             //GeneratePDF pdf = new GeneratePDF();
             GeneratePDF.CreateTable("test.pdf");

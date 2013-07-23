@@ -9,7 +9,7 @@ using MongoDB.Driver;
 
 namespace SupermarketManager
 {
-    class MongoDBAccess
+    public class MongoDBAccess
     {
         MongoClient client;
         MongoServer server;
@@ -63,6 +63,10 @@ namespace SupermarketManager
             return reportCollection.FindAll();
         }
 
+        public IEnumerable<ExpenseModel> GetExpenseObjects()
+        {
+            return expensesCollection.FindAll();
+        }
 
     }
 }

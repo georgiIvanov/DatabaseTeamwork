@@ -10,7 +10,7 @@ using System.IO;
 
 namespace SupermarketManager
 {
-    class ReportCreator
+    public class ReportCreator
     {
         static List<ReportModel> GetReportData()
         {
@@ -106,7 +106,7 @@ namespace SupermarketManager
         }
     }
 
-    class ReportModel
+    public class ReportModel
     {
         [JsonConverter(typeof(ObjectIdConverter))]
         public ObjectId _id { get; set; }
@@ -122,7 +122,7 @@ namespace SupermarketManager
         public decimal total_incomes { get; set; }
     }
 
-    class ExpenseModel
+    public class ExpenseModel
     {
         public ObjectId _id { get; set; }
 
